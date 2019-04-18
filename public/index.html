@@ -16,8 +16,8 @@
                 <a href="#!" class="brand-logo">Calorie Tracker</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="today.html">Today</a></li>
-                    <li><a href="">History</a></li>
-                    <li class="active"><a href="">Analytics</a></li>
+                    <li class="active"><a href="">History</a></li>
+                    <li><a href="">Analytics</a></li>
                     <li><a href="#" class="clear-btn btn green lighten-3">Clear All</a></li>
                 </ul>
             </div>
@@ -34,10 +34,10 @@
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s7">
-                                <input type="text" placeholder="Select a Date"class="datepicker">
+                                <input type="text" required="" aria-required="true" type="submit" placeholder="Select a Date" class="datepicker" id="date-selected">
                             </div>
                             <div class="input-field col s5">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Go
+                                <button class="btn waves-effect waves-light" type="button" name="action" id="view-day" onclick="unhide()" >Go
                                 </button>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
     </div>
     <br>
 
-    <div class="container">
+    <div class="container hide" id="edit">
         <h5 id="datetime"></h5>
         <!-- form card -->
         <div class="card">
@@ -106,9 +106,37 @@
     crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="app.js"></script>
+    <script>
+        
+        function unhide() {
+            let x = document.getElementById("edit");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        $(document).ready(function (){
+            validate();
+            $('#date-selected').change(validate);
+        });
+
+        function validate(){
+            if ($('#date-selected').val().length > 0) {
+                $("#view-day").prop("disabled", false);
+            }
+            else {
+                $("#view-day").prop("disabled", true);
+            }
+        }
+  </script>
 </body>
 </html>
 
 <style>
-   
+  .hide {
+    display: none;
+  }
+
 </style>
