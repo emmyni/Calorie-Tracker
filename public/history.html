@@ -15,8 +15,8 @@
             <div class="container">
                 <a href="#!" class="brand-logo">Calorie Tracker</a>
                 <ul class="right hide-on-med-and-down">
-                    <li class="active"><a href="">Today</a></li>
-                    <li><a href="history.html">History</a></li>
+                    <li><a href="today.html">Today</a></li>
+                    <li class="active"><a href="">History</a></li>
                     <li><a href="analytics.html">Analytics</a></li>
                     <li><a href="#" class="clear-btn btn green lighten-3">Clear All</a></li>
                 </ul>
@@ -27,8 +27,29 @@
     <br>
 
     <div class="container">
-        <h4 class="center-align">Today</h4>
-        <br>
+        <div class="card">
+            <div class="row">
+                <div class="col s12 m6">
+                    <h5>View/ Enter Calories for</h5>
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s7">
+                                <input type="text" required="" aria-required="true" type="submit" placeholder="Select a Date" class="datepicker" id="date-selected">
+                            </div>
+                            <div class="input-field col s5">
+                                <button class="btn waves-effect waves-light" type="button" name="action" id="view-day" onclick="unhide()" >Go
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container hide" id="edit">
+        <h5 id="datetime"></h5>
         <!-- form card -->
         <div class="card">
             <div class="card-content">
@@ -52,11 +73,28 @@
             </div>
         </div>
         <!-- Calories Count-->
-        <h5 class="center-align">Total Calories: <span class="total-calories">0</span></h5>
+        <h4 class="center-align">Total Calories: <span class="total-calories">0</span></h4>
 
         <!-- item list -->
         <ul id="item-list" class="collection">
-
+            <!-- <li class="collection-item" id="item-0">
+                <strong>Streak Dinner: </strong><em>1200 Calories</em>
+                <a href="#" class="secondary-content">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </li>
+            <li class="collection-item" id="item-0">
+                <strong>Eggs: </strong><em>300 Calories</em>
+                <a href="#" class="secondary-content">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </li>
+            <li class="collection-item" id="item-0">
+                <strong>Cookie: </strong><em>200 Calories</em>
+                <a href="#" class="secondary-content">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </li> -->
         </ul>
     </div>
     <br>
@@ -68,9 +106,37 @@
     crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="app.js"></script>
+    <script>
+        
+        function unhide() {
+            let x = document.getElementById("edit");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        $(document).ready(function (){
+            validate();
+            $('#date-selected').change(validate);
+        });
+
+        function validate(){
+            if ($('#date-selected').val().length > 0) {
+                $("#view-day").prop("disabled", false);
+            }
+            else {
+                $("#view-day").prop("disabled", true);
+            }
+        }
+  </script>
 </body>
 </html>
 
 <style>
-   
+  .hide {
+    display: none;
+  }
+
 </style>
