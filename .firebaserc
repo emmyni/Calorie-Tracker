@@ -1,6 +1,0 @@
-{
-  "projects": {
-    "staging": "tracker-calories",
-    "default": "tracker-calories"
-  }
-}
