@@ -1,0 +1,73 @@
+<nav>
+    <div class="nav-wrapper green">
+        <div class="container">
+            <a href="#!" class="brand-logo">Calorie Tracker</a>
+            <ul class="right hide-on-med-and-down">
+                <li class="active"><a href="today.html">Today</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+
+<div class="container">
+    <h4 class="center-align">Today</h4>
+    <br>
+    <!-- form card -->
+    <div class="card">
+        <div class="card-content">
+            <div class="row">
+                <div class="col s10">
+                    <span class="card-title">Add Meal / Food Item</span>
+                </div>
+                <div class="col s2">
+                        <span><a href="#" class="clear-btn btn green lighten-3">Clear All</a></span>
+                </div>
+            </div>
+            <form class="col" action="/insert" method="post">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" placeholder="Add Item" id="item-name" name="food">
+                        <label for="item-name">Meal</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="number" placeholder="Add Calories" id="item-calories" name="calorie">
+                        <label for="item-calories">Calories</label>
+                    </div>
+                    <button class="add-btn btn green darken-3" type="submit"><i class="fa fa-plus"></i> Add Meal</button>
+                    {{!-- <button class="update-btn btn orange"><i class="fa fa-pencil-square-o"></i> Update Meal</button>
+                    <button class="delete-btn btn red"><i class="fa fa-remove"></i> Delete Meal</button>
+                    <button class="back-btn btn grey pull-right"><i class="fa fa-chevron-circle-left"></i> Back</button> --}}
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Calories Count-->
+    <h5 class="center-align">Total Calories: <span class="total-calories">0</span></h5>
+
+    <br>
+    <ul id="item-list" class="collection">
+        <div>
+            {{# each items }}
+                <li class="collection-item" id="item-${item.id}">
+                    <strong>{{ this.food }}: </strong><em> {{ this.calorie }} Calories</em>
+                    <a href="#" class="secondary-content">
+                        <i class="edit-item fa fa-pencil"></i>
+                    </a>
+                </li>
+            {{/each}}
+        </div>
+    </ul>
+</div>
+<br>
+<br>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
