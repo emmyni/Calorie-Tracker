@@ -39,4 +39,29 @@ router.post('/insert', function(req, res, next) {
   res.redirect('/');
 });
 
+router.post('/update', function(req, res, next) {
+  var item = {
+    food: req.body.food,
+    calorie: req.body.calorie
+  };
+
+  var id = req.body.id;
+
+  Today.findById(id, function(err, doc) {
+    if (err) {
+      console.log('error, no entry found');
+    }
+    doc.food = req.body.food;
+    doc.calorie = req.body.calorie;
+    doc.save();
+  });
+  res.redirect('/');
+});
+
+router.post('/delete', function(req, res, next) {
+  var id = req.body.id;
+  Test.findByIdAndRemove(id).exec();
+  res.redirect('/');
+});
+
 module.exports = router;
