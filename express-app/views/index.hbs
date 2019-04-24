@@ -11,9 +11,6 @@
     </div>
 </nav>
 
-<br>
-<br>
-
 <div class="container">
     <h4 class="center-align">Today</h4>
     <br>
@@ -25,11 +22,11 @@
                     <span class="card-title">Add Meal / Food Item</span>
                 </div>
                 <div class="col s2">
-                        <span><a href="#" class="clear-btn btn green lighten-3">Clear All</a></span>
+                    <span><a href="#" class="clear-btn btn green lighten-3">Clear All</a></span>
                 </div>
             </div>
-            <form class="col" action="/insert" method="post">
                 <div class="row">
+                    <form class="col" id="form" method="post">
                     <div class="input-field col s6">
                         <input type="text" placeholder="Add Item" id="item-name" name="food">
                         <label for="item-name">Meal</label>
@@ -38,12 +35,13 @@
                         <input type="number" placeholder="Add Calories" id="item-calories" name="calorie">
                         <label for="item-calories">Calories</label>
                     </div>
-                    <button class="add-btn btn green darken-3" type="submit"><i class="fa fa-plus"></i> Add Meal</button>
-                    {{!-- <button class="update-btn btn orange"><i class="fa fa-pencil-square-o"></i> Update Meal</button>
-                    <button class="delete-btn btn red"><i class="fa fa-remove"></i> Delete Meal</button>
-                    <button class="back-btn btn grey pull-right"><i class="fa fa-chevron-circle-left"></i> Back</button> --}}
+                    <input type="hidden" name="id" id="id" value=''>
+                    <button class="add-btn btn green darken-3" formaction="/insert" type="submit"><i class="fa fa-plus"></i> Add Meal</button>
+                    <button class="update-btn btn orange" formaction="/update" type="submit" style="display:none"><i class="fa fa-pencil-square-o"></i> Update Meal</button>
+                    <button class="delete-btn btn red" formaction="/delete" type="submit" style="display:none"><i class="fa fa-remove"></i> Delete Meal</button>
+                    <button class="back-btn btn grey pull-right" formaction="/" style="display:none"><i class="fa fa-chevron-circle-left"></i> Back</button>
+                    </form>
                 </div>
-            </form>
         </div>
     </div>
     <!-- Calories Count-->
@@ -53,9 +51,9 @@
     <ul id="item-list" class="collection">
         <div>
             {{# each items }}
-                <li class="collection-item" id="item-${item.id}">
+                <li class="collection-item">
                     <strong>{{ this.food }}: </strong><em> {{ this.calorie }} Calories</em>
-                    <a href="#" class="secondary-content">
+                    <a href="#" class="secondary-content" id={{ this._id }} food= "{{ this.food }}" calorie= "{{ this.calorie }}">
                         <i class="edit-item fa fa-pencil"></i>
                     </a>
                 </li>
@@ -71,3 +69,19 @@ src="https://code.jquery.com/jquery-3.3.1.min.js"
 integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.secondary-content').click(function () {
+            var answerid = $(this).attr('id');
+            var food = $(this).attr('food');
+            var calorie = $(this).attr('calorie');
+            document.querySelector('#item-name').value = food;              
+            document.querySelector('#item-calories').value = calorie;
+            document.querySelector('#id').value = answerid;
+            document.querySelector('.add-btn').style.display = 'none';
+            document.querySelector('.update-btn').style.display = 'inline';
+            document.querySelector('.delete-btn').style.display = 'inline';
+            document.querySelector('.back-btn').style.display = 'inline';
+        });
+    });
+</script>

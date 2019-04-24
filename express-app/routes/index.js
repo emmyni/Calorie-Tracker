@@ -13,19 +13,19 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.post('/', function(req, res, next) {
+  Today.find()
+    .then(function(doc) {
+      res.render('index', {items: doc});
+    });
+});
+
 var testSchema = new Schema({
   food: {type: String, required: true},
   calorie: {type: Number, required: true}
 }, {collection: 'today'});
 
 var Today = mongoose.model('Today', testSchema);
-
-router.get('/get-data', function(req, res, next) {
-  Today.find()
-    .then(function(doc) {
-      res.render('index', {items: doc});
-    });
-})
 
 router.post('/insert', function(req, res, next) {
   var item = {
@@ -46,6 +46,7 @@ router.post('/update', function(req, res, next) {
   };
 
   var id = req.body.id;
+  console.log(id);
 
   Today.findById(id, function(err, doc) {
     if (err) {
@@ -60,7 +61,7 @@ router.post('/update', function(req, res, next) {
 
 router.post('/delete', function(req, res, next) {
   var id = req.body.id;
-  Test.findByIdAndRemove(id).exec();
+  Today.findByIdAndRemove(id).exec();
   res.redirect('/');
 });
 
