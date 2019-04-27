@@ -9,7 +9,14 @@ var Schema = mongoose.Schema;
 router.get('/', function(req, res, next) {
   Today.find()
     .then(function(doc) {
-      res.render('index', {items: doc});
+      let totalCalories = doc.reduce(function (acc, item) {
+        return acc + item.calorie;
+      }, 0);
+      let context = {
+        items: doc,
+        totalCalories: totalCalories
+      }
+      res.render('index', context);
     });
 });
 
