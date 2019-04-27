@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/calories', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || 'localhost:27017/calories', {useNewUrlParser: true});
 var Schema = mongoose.Schema;
 
 /* GET home page. */
